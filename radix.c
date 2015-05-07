@@ -18,7 +18,7 @@ int compute_lengths(char **input, long input_size, int *lengths) {
 int char_to_index(char character) {
     int index;
     if(character > 96) {
-        index = character - 97 + 26 + 1;
+        index = character - 97 + 1;
     } else {
         index = character - 65 + 1;
     }
@@ -115,7 +115,7 @@ void print(char **input, long input_size) {
 
 int main() {
 
-    char* input[] = {"wala", "ala" , "lula", "luba", "luda" ,"loda", "lala", "lalaa", "srala", "bocian", "dziabag"};
+    char* input[] = {"wala", "ala" , "lula", "luba", "luda" ,"Loda", "lala", "Lalaa", "srala", "bocian", "dziabag"};
     long n = sizeof(input) / sizeof(char*);
 
     printf("INPUT:\n");
