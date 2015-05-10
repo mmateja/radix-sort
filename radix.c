@@ -74,6 +74,12 @@ static char** counting_sort(char **input, long input_size, int *lengths, int sor
 		exit(-1);
 	}
 
+	int *output_lengths = malloc(input_size * sizeof(int));
+	if (output_lengths == NULL) {
+		fprintf(stderr, "Allocation error!\n");
+		exit(-1);
+	}
+
 	// computing element positions
 	for (i = 0; i < input_size; i++) {
 		if (sorted_position >= lengths[i]) {
@@ -81,7 +87,9 @@ static char** counting_sort(char **input, long input_size, int *lengths, int sor
 			counts[0]++;
 		} else {
 			index = char_to_index(input[i][sorted_position]);
-			output[counts[index]] = input[i];
+			int output_index = counts[index];
+			output[output_index] = input[i];
+			output_lengths[output_index] = lengths[i];
 			counts[index]++;
 		}
 	}
@@ -91,14 +99,13 @@ static char** counting_sort(char **input, long input_size, int *lengths, int sor
 	// copying positions to 'input' table
 	for (i = 0; i < input_size; i++) {
 		input[i] = output[i];
+		lengths[i] = output_lengths[i];
 	}
 
 	free(output);
+	free(output_lengths);
 
-	// TODO: reimplement this, not computing lengths again
-	compute_lengths(input, input_size, lengths);
-
-	return output;
+	return input;
 }
 
 void radix(long input_size, char **input) {
