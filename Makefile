@@ -1,4 +1,4 @@
 all: build
 
-build: radix.c
-	gcc -Wall -Wextra -O2 -std=c99 -o radix radix.c
+build: radix.c main.c
+	gcc -Wall -Wextra -O2 -std=c99 -o radix radix.c main.c
